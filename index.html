@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Genesis of AI & Robotics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #111827;
+            --bg-light: #1F2937;
+            --text-primary: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --accent-blue: #38BDF8;
+            --accent-green: #34D399;
+            --accent-red: #F87171;
+            --accent-purple: #818CF8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 25px 25px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            margin-bottom: 60px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a2233 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1), transparent 60%);
+            transform: translate(-50%, -50%);
+            animation: pulse-glow 8s infinite ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+        }
+
+        .hero h1 {
+            font-size: 4.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- General Section Styling --- */
+        .section {
+            background-color: var(--bg-light);
+            margin: 60px 0;
+            padding: 50px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .section-header p {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* --- Glassmorphism Cards --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .glass-card {
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border-color: var(--accent-blue);
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--accent-blue), transparent 80%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .glass-card:hover::before {
+            opacity: 0.15;
+        }
+        
+        .glass-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+        }
+
+        .glass-card h3 .icon {
+            margin-right: 12px;
+            font-size: 1.2em;
+        }
+        
+        .glass-card p {
+            color: var(--text-secondary);
+        }
+
+        /* --- Comparison Section --- */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .comparison-card {
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .comparison-card .icon { font-size: 1.5em; margin-right: 15px; }
+        .robot-title { color: var(--accent-purple); }
+        .ai-title { color: var(--accent-green); }
+        
+        .comparison-card p {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        /* --- Facts Grid --- */
+        .facts-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             gap: 25px;
+        }
+
+        .fact-card {
+            background: linear-gradient(135deg, #2a3a4a, #1f2937);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .fact-card .fact-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .fact-card h3 {
+            font-size: 1.2em;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .fact-card p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+        }
+
+        /* --- Interactive Demo --- */
+        .interactive-demo {
+            text-align: center;
+        }
+
+        .demo-button {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .demo-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+        }
+        
+        .demo-button:disabled {
+            background: var(--bg-light);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        #thinkingSteps {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .thinking-step {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent-blue);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+        .thinking-step.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Quiz Section --- */
+        #quiz-container {
+            margin-top: 30px;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .quiz-progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+        
+        #quiz-progress {
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent-blue);
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+        
+        .quiz-question p { font-size: 1.4em; font-weight: 500; margin-bottom: 30px; }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-blue);
+        }
+        
+        .quiz-option.correct { background-color: rgba(52, 211, 153, 0.2); border-color: var(--accent-green); }
+        .quiz-option.incorrect { background-color: rgba(248, 113, 113, 0.2); border-color: var(--accent-red); }
+        
+        #quiz-results {
+            text-align: center;
+        }
+        #quiz-results h3 { font-size: 2em; margin-bottom: 15px; }
+        #quiz-results p { font-size: 1.2em; color: var(--text-secondary); margin-bottom: 30px; }
+
+
+        /* --- Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h3 {
+            font-size: 2em;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2em;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.5em; }
+            .section { padding: 40px 25px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 1em; }
+            .section-header h2 { font-size: 2.2em; }
+            .grid, .comparison-grid, .quiz-options { grid-template-columns: 1fr; }
+            .comparison-grid { gap: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero reveal">
+            <h1>The Genesis of AI & Robotics</h1>
+            <p>A deep dive into the architecture of intelligence and the mechanics of automation that are shaping our future.</p>
+        </header>
+
+        <main>
+            <section class="section reveal">
+                <div class="section-header">
+                    <h2>What is a Robot?</h2>
+                    <p>At its core, a robot is a physical entity designed to sense, process, and act upon the world. We can broadly categorize them by their operational intelligence.</p>
+                </div>
+                <div class="grid">
+                    <div class="glass-card" onclick="showModal('machines')">
+                        <h3><span class="icon">🔧</span>Machines with Purpose</h3>
+                        <p>Robots are purpose-built machines, from microscopic nanobots in medicine to colossal manufacturing arms. Their form is dictated by their function.</p>
+                    </div>
+                    <div class="glass-card" onclick="showModal('preprogrammed')">
+                        <h3><span class="icon">📋</span>Deterministic Automation</h3>
+                        <p>Pre-programmed robots execute a fixed set of commands with high precision. They operate in controlled environments, excelling at repetitive, defined tasks.</p>
+                    </div>
+                    <div class="glass-card" onclick="showModal('ai')">
+                        <h3><span class="icon">🧠</span>Cognitive Machines</h3>
+                        <p>AI-powered robots leverage machine learning to perceive, learn, and adapt. They can make autonomous decisions in dynamic, unstructured environments.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section reveal">
+                <div class="section-header">
+                    <h2>Robot vs. AI: A Symbiotic Distinction</h2>
+                    <p>While often conflated, "Robot" and "AI" are distinct concepts. A robot is the body; AI is the brain. One can exist without the other, but their synergy unlocks true potential.</p>
+                </div>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3 class="robot-title"><span class="icon">🤖</span>Robotics: The Body</h3>
+                        <p><strong>Focus:</strong> Physical embodiment and interaction.</p>
+                        <p><strong>Components:</strong> Sensors, actuators, processors, physical chassis.</p>
+                        <p><strong>Function:</strong> Performs tasks in the physical world.</p>
+                        <p><strong>Intelligence:</strong> Can range from non-existent (remote control) to fully AI-driven.</p>
+                    </div>
+                     <div class="comparison-card">
+                        <h3 class="ai-title"><span class="icon">🧠</span>Artificial Intelligence: The Brain</h3>
+                        <p><strong>Focus:</strong> Algorithmic reasoning and learning.</p>
+                        <p><strong>Components:</strong> Neural networks, data sets, learning models.</p>
+                        <p><strong>Function:</strong> Processes data, recognizes patterns, and makes decisions.</p>
+                        <p><strong>Intelligence:</strong> Is purely computational; does not require a physical form.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section reveal interactive-demo">
+                 <div class="section-header">
+                    <h2>The Robotic Thought Process</h2>
+                    <p>An AI-powered robot's "thinking" is a rapid, cyclical process of data ingestion, analysis, and action. Let's visualize this cognitive loop.</p>
+                </div>
+                <button class="demo-button" id="demoBtn" onclick="demonstrateRobotThinking()">Initiate Cognitive Cycle</button>
+                <div id="thinkingSteps"></div>
+            </section>
+            
+            <section class="section reveal">
+                <div class="section-header">
+                    <h2>Amazing Facts in Robotics</h2>
+                    <p>The field of robotics is marked by incredible milestones and mind-bending capabilities that push the boundaries of science and engineering.</p>
+                </div>
+                 <div class="facts-grid">
+                    <div class="fact-card">
+                        <span class="fact-number">1961</span>
+                        <h3>First Industrial Robot</h3>
+                        <p>The "Unimate" arm first went to work at a General Motors plant, forever changing manufacturing.</p>
+                    </div>
+                    <div class="fact-card">
+                        <span class="fact-number">3.5M+</span>
+                        <h3>Operational Robots</h3>
+                        <p>Over 3.5 million industrial robots are currently operational worldwide, a number growing exponentially.</p>
+                    </div>
+                    <div class="fact-card">
+                        <span class="fact-number">0.1mm</span>
+                        <h3>Surgical Precision</h3>
+                        <p>Surgical robots like the Da Vinci system can perform procedures with precision far beyond human hands.</p>
+                    </div>
+                    <div class="fact-card">
+                        <span class="fact-number">225M km</span>
+                        <h3>Interplanetary Control</h3>
+                        <p>NASA's Mars rovers are sophisticated robots operated from an average distance of 225 million kilometers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section reveal">
+                <div class="section-header">
+                    <h2>Test Your Knowledge</h2>
+                    <p>Engage with what you've learned. This short quiz will test your understanding of the core concepts of AI and robotics.</p>
+                </div>
+                <div id="quiz-container">
+                    </div>
+                 <button class="demo-button" onclick="startQuiz()" id="start-quiz-btn">Begin Assessment</button>
+            </section>
+        </main>
+    </div>
+    
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modalCloseBtn" class="modal-close">&times;</button>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+    <script>
+        // --- On-Scroll Reveal Animation ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.is_intersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: unobserve after revealing
+                    // revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- Modal Logic ---
+        const modalData = {
+            machines: {
+                title: "🔧 Machines with Purpose",
+                text: "Robots are the physical manifestation of automation. Their design is a direct reflection of their intended task, whether it's assembling a circuit board with delicate precision or exploring the crushing depths of the ocean."
+            },
+            preprogrammed: {
+                title: "📋 Deterministic Automation",
+                text: "These are the workhorses of industry. Following a rigid script, they execute tasks flawlessly and tirelessly. Their value lies not in adaptability, but in unparalleled consistency and speed within a structured environment."
+            },
+            ai: {
+                title: "🧠 Cognitive Machines",
+                text: "This is where robotics transcends simple automation. By integrating AI, a robot can analyze sensory input, learn from past outcomes, and strategize its next move. It transitions from a tool to an autonomous agent capable of problem-solving."
+            }
+        };
+        const modal = document.getElementById('infoModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        
+        function showModal(type) {
+            if (modalData[type]) {
+                modalTitle.innerHTML = modalData[type].title;
+                modalText.textContent = modalData[type].text;
+                modal.classList.add('visible');
+            }
+        }
+        
+        function closeModal() {
+            modal.classList.remove('visible');
+        }
+        modalCloseBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+
+        // --- Robot Thinking Demonstration ---
+        function demonstrateRobotThinking() {
+            const demoBtn = document.getElementById('demoBtn');
+            const stepsDiv = document.getElementById('thinkingSteps');
+            stepsDiv.innerHTML = '';
+            demoBtn.disabled = true;
+
+            const steps = [
+                "<strong>[Input]</strong> Sensory data stream initiated. (Visual, Lidar, Tactile...)",
+                "<strong>[Perception]</strong> Processing raw data. Object recognition & environment mapping...",
+                "<strong>[Analysis]</strong> Comparing current state to goal state. Evaluating potential actions...",
+                "<strong>[Decision]</strong> Optimal action selected based on predictive model. (e.g., pathing algorithm, manipulation sequence)",
+                "<strong>[Action]</strong> Executing motor commands. Actuators engaged.",
+                "<strong>[Feedback]</strong> Monitoring action outcome. Updating world model & learning parameters. Cycle repeats."
+            ];
+
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'thinking-step';
+                    stepDiv.innerHTML = step;
+                    stepsDiv.appendChild(stepDiv);
+                    
+                    setTimeout(() => stepDiv.classList.add('visible'), 50);
+
+                    if (index === steps.length - 1) {
+                         demoBtn.disabled = false;
+                    }
+                }, index * 1200);
+            });
+        }
+        
+        // --- Quiz Logic ---
+        const quizData = [
+            {
+                question: "What is the primary distinction between a robot and AI?",
+                options: [
+                    "Robots are physical; AI is computational intelligence.",
+                    "AI is always more advanced than robotics.",
+                    "All robots have advanced AI.",
+                    "They are effectively the same concept."
+                ],
+                correct: 0
+            },
+            {
+                question: "A factory robot arm that welds car doors in the exact same way every time is an example of a:",
+                options: [
+                    "Cognitive Machine",
+                    "Pre-programmed Robot",
+                    "General AI",
+                    "Learning Automaton"
+                ],
+                correct: 1
+            },
+            {
+                question: "What technology allows a robot to learn and adapt to new situations?",
+                options: [
+                    "Hydraulic Actuators",
+                    "A Fixed Instruction Set",
+                    "Machine Learning (AI)",
+                    "A Stronger Chassis"
+                ],
+                correct: 2
+            },
+            {
+                question: "NASA's Mars rovers are examples of robots primarily used for:",
+                options: [
+                    "Manufacturing",
+                    "Domestic Assistance",
+                    "Exploration and Data Collection",
+                    "Medical Surgery"
+                ],
+                correct: 2
+            },
+            {
+                question: "The concept of a robot being the 'body' and AI being the 'brain' illustrates that:",
+                options: [
+                    "A robot cannot function without AI.",
+                    "AI cannot exist without a robot body.",
+                    "The two are distinct but can be powerfully combined.",
+                    "AI is simply the software that runs on a robot."
+                ],
+                correct: 2
+            }
+        ];
+        
+        const quizContainer = document.getElementById('quiz-container');
+        const startBtn = document.getElementById('start-quiz-btn');
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function startQuiz() {
+            startBtn.style.display = 'none';
+            currentQuestionIndex = 0;
+            score = 0;
+            // Optional: shuffle questions for variety
+            // quizData.sort(() => Math.random() - 0.5);
+            showQuestion();
+        }
+
+        function showQuestion() {
+            quizContainer.innerHTML = '';
+            if (currentQuestionIndex < quizData.length) {
+                const questionData = quizData[currentQuestionIndex];
+
+                const progressHTML = `
+                    <div class="quiz-progress-bar">
+                        <div id="quiz-progress" style="width: ${((currentQuestionIndex) / quizData.length) * 100}%"></div>
+                    </div>`;
+
+                const questionHTML = `
+                    <div class="quiz-question">
+                        <p>${currentQuestionIndex + 1}. ${questionData.question}</p>
+                        <div class="quiz-options">
+                            ${questionData.options.map((option, index) => `
+                                <div class="quiz-option" data-index="${index}">${option}</div>
+                            `).join('')}
+                        </div>
+                    </div>`;
+                
+                quizContainer.innerHTML = progressHTML + questionHTML;
+                
+                // Animate progress bar update
+                setTimeout(() => {
+                    document.getElementById('quiz-progress').style.width = ((currentQuestionIndex + 1) / quizData.length) * 100 + '%';
+                }, 100);
+
+                const options = quizContainer.querySelectorAll('.quiz-option');
+                options.forEach(option => {
+                    option.addEventListener('click', selectAnswer);
+                });
+            } else {
+                showResults();
+            }
+        }
+
+        function selectAnswer(e) {
+            const selectedOption = e.target;
+            const selectedAnswer = parseInt(selectedOption.dataset.index);
+            const correctAnswer = quizData[currentQuestionIndex].correct;
+
+            // Disable further clicks
+            const allOptions = quizContainer.querySelectorAll('.quiz-option');
+            allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+
+            if (selectedAnswer === correctAnswer) {
+                score++;
+                selectedOption.classList.add('correct');
+            } else {
+                selectedOption.classList.add('incorrect');
+                allOptions[correctAnswer].classList.add('correct');
+            }
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                showQuestion();
+            }, 1500);
+        }
+
+        function showResults() {
+            const percentage = Math.round((score / quizData.length) * 100);
+            let message = '';
+
+            if (percentage === 100) {
+                message = "Perfect Score! Your understanding is flawless.";
+            } else if (percentage >= 80) {
+                message = "Excellent! You have a strong grasp of these concepts.";
+            } else if (percentage >= 60) {
+                message = "Good job! You're well on your way to becoming an expert.";
+            } else {
+                message = "Keep exploring! There's more to learn in this fascinating field.";
+            }
+
+            quizContainer.innerHTML = `
+                <div id="quiz-results">
+                    <h3>Assessment Complete</h3>
+                    <p>You scored ${score} out of ${quizData.length} (${percentage}%)</p>
+                    <p>${message}</p>
+                    <button class="demo-button" onclick="startQuiz()">Try Again</button>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
